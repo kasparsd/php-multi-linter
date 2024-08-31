@@ -2,7 +2,7 @@ FROM debian:bookworm-slim
 
 # System dependencies.
 RUN apt-get update \
-    && apt-get --yes install curl wget gnupg2 ca-certificates lsb-release apt-transport-https
+    && apt-get --yes install curl wget gnupg2 ca-certificates lsb-release apt-transport-https readline-common git
 
 # Add https://packages.sury.org/php/ repository and install PHP.
 RUN curl --location https://packages.sury.org/php/apt.gpg | apt-key add - \
