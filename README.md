@@ -20,7 +20,7 @@ Results are stored in `report-PHPVERSION.csv` files for each PHP version in the 
 
       docker compose run --rm php-multi-linter
 
-2. Run `docker compose run php-multi-linter ./tests` to run a report on the `tests` directory.
+2. Run `docker compose run php-multi-linter php7.4 lint.php ./tests` to run a report on the `tests` directory.
 
 ## Credits
 
