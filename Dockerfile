@@ -1,5 +1,7 @@
 FROM debian:bookworm-slim
 
+LABEL org.opencontainers.image.source https://github.com/kasparsd/php-multi-linter
+
 # System dependencies.
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends curl wget gnupg2 ca-certificates lsb-release apt-transport-https
