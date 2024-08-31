@@ -1,4 +1,4 @@
-# PHP Multi Linter
+# PHP Multi Linter 🍍🍊🍋
 
 A docker image with multiple PHP CLI versions and a [`lint.php`](lint.php) script that runs `php -l` for all files in the `/app/code` directory using each of the included PHP CLI binaries.
 
