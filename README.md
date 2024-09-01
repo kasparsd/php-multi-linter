@@ -12,6 +12,8 @@ which mounts the current working directory into `/app/code` inside the container
 
 Results are stored in `report-PHPVERSION.csv` files for each PHP version in the current directory.
 
+![PHP Multi Linter CLI output and CSV report](output.png)
+
 ### Runing Locally
 
 1. Build the image locally using `docker compose build`.
