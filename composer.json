@@ -1,0 +1,8 @@
+{
+	"name": "kasparsd/php-multi-linter",
+	"type": "project",
+	"license": "MIT",
+	"require": {
+		"php-parallel-lint/php-parallel-lint": "^1.4"
+	}
+}
