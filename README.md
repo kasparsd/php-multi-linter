@@ -2,6 +2,13 @@
 
 A docker image with multiple PHP CLI versions and a [`lint.php`](lint.php) script that runs `php -l` for all files in the `/app/code` directory using each of the included PHP CLI binaries.
 
+Similar tools:
+
+- [`php-parallel-lint`](https://github.com/php-parallel-lint/PHP-Parallel-Lint) which provides extensive controls over `php -l` and runs it in parallel.
+
+- [`phpqa` Docker image](https://github.com/jakzal/phpqa) which includes dozens of PHP tools.
+
+
 ## Usage
 
 Navigate to your PHP project and run:
