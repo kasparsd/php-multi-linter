@@ -30,8 +30,8 @@ RUN update-alternatives --set php /usr/bin/php7.4
 RUN curl --silent --show-error https://getcomposer.org/installer \
         | php -- --install-dir=/usr/bin --filename=composer --2.2
 
-# Persist the cache between runs.
-VOLUME /root/.composer/cache
+# Persist the packages and cache between runs.
+VOLUME /root/.composer
 
 COPY composer.json composer.lock entrypoint.sh /root/.composer/
 
