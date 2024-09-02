@@ -1,7 +1,7 @@
 services:
 
-  php-multi-linter:
-    image: ghcr.io/kasparsd/php-multi-linter:latest
+  php-multitool:
+    image: ghcr.io/kasparsd/php-multitool:latest
     build: .
     volumes:
-      - .:/app
+      - .:/code

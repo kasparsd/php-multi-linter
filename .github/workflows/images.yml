@@ -2,9 +2,8 @@ name: Docker Images
 
 on:
   push:
-    branches:
-      - main
     paths:
+      # Build on changes to any files included in the image.
       - Dockerfile
       - lint.php
 
@@ -26,8 +25,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build
+        uses: docker/bake-action@v5
+        if: github.ref_name != 'main'
+      
       - name: Build and push
         uses: docker/bake-action@v5
+        if: github.ref_name == 'main'
         with:
           set: '*.platform=linux/amd64,linux/arm64'
           push: true
