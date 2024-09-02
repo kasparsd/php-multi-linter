@@ -13,14 +13,14 @@ RUN curl --location https://packages.sury.org/php/apt.gpg | apt-key add - \
 
 # Install PHP versions.
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-        php5.6-cli php5.6-xmlwriter \
-        php7.2-cli php7.2-xmlwriter \
-        php7.4-cli php7.4-xmlwriter \
-        php8.0-cli php8.1-xmlwriter \
-        php8.1-cli php8.1-xmlwriter \
-        php8.2-cli php8.2-xmlwriter \
-        php8.3-cli php8.3-xmlwriter \
-        php8.4-cli php8.4-xmlwriter \
+        php5.6-cli php5.6-zip php5.6-xmlwriter \
+        php7.2-cli php7.2-zip php7.2-xmlwriter \
+        php7.4-cli php7.4-zip php7.4-xmlwriter \
+        php8.0-cli php8.0-zip php8.0-xmlwriter \
+        php8.1-cli php8.1-zip php8.1-xmlwriter \
+        php8.2-cli php8.2-zip php8.2-xmlwriter \
+        php8.3-cli php8.3-zip php8.3-xmlwriter \
+        php8.4-cli php8.4-zip php8.4-xmlwriter \
     && apt-get clean
 
 # Set the default php binary version.
