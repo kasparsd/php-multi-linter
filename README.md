@@ -1,4 +1,4 @@
-# PHP Multi Tool 🔬
+# PHP Multitool 🔬
 
 A docker image with multiple PHP versions and Composer v2 to install and run almost any PHP tool.
 
