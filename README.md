@@ -61,7 +61,7 @@ The default command is set to `composer global show -vvv` which lists all of the
 
        docker compose run --rm -e PHPBIN=php8.2 php-multitool parallel-lint ./tests
 
-### `php-multitool` Alias
+### Create `php-multitool` Alias
 
 Add an alias to your shell profile (e.g., `~/.bashrc` or `~/.zshrc`) for each version of PHP as needed:
 
@@ -77,10 +77,33 @@ All examples below assume that you're running the commands from the root of your
 
 ### phpcs and phpcbf (PHP_CodeSniffer)
 
-#### Check PHP 8 Compatibility of WordPress projects
+The following PHP_CodeSniffer standards are installed by default:
 
-    docker run --rm -v .:/code -e PHPBIN=php8.4 ghcr.io/kasparsd/php-multitool:latest \
-        phpcs -p --standard=PHPCompatibilityWP --extensions=php .
+    docker run --rm -v .:/code -e PHPBIN=php7.4 ghcr.io/kasparsd/php-multitool:latest \
+        phpcs -i
+    
+    The installed coding standards are MySource, PEAR, PSR1, PSR2, PSR12, Squiz, Zend, PHPCompatibility, PHPCompatibilityJoomla, PHPCompatibilityParagonieRandomCompat, PHPCompatibilityParagonieSodiumCompat, PHPCompatibilityPasswordCompat, PHPCompatibilitySymfonyPolyfillPHP54, PHPCompatibilitySymfonyPolyfillPHP55, PHPCompatibilitySymfonyPolyfillPHP56, PHPCompatibilitySymfonyPolyfillPHP70, PHPCompatibilitySymfonyPolyfillPHP71, PHPCompatibilitySymfonyPolyfillPHP72, PHPCompatibilitySymfonyPolyfillPHP73, PHPCompatibilitySymfonyPolyfillPHP74, PHPCompatibilitySymfonyPolyfillPHP80, PHPCompatibilityWP, Modernize, NormalizedArrays, Universal, PHPCSUtils, WordPress, WordPress-Core, WordPress-Docs and WordPress-Extra
+
+#### Example: Check WordPress PHP Coding Standards
+
+    docker run --rm -v .:/code -e PHPBIN=php7.4 ghcr.io/kasparsd/php-multitool:latest \
+        phpcs -p --standard=WordPress --extensions=php .
+
+where `--standard=WordPress` can be any of the installed PHP_CodeSniffer standards.
+
+#### Example: Check PHP 8 Compatibility for WordPress Projects
+
+    docker run --rm -v .:/code -e PHPBIN=php7.4 ghcr.io/kasparsd/php-multitool:latest \
+        phpcs -p --standard=PHPCompatibilityWP --runtime-set testVersion 5.6- --extensions=php .
+
+where `--runtime-set testVersion 5.6-` sets the target PHP version to PHP 5.6 and newer.
+
+### parallel-lint
+
+Check PHP files for syntax errors:
+
+    docker run --rm -v .:/code -e PHPBIN=php7.4 ghcr.io/kasparsd/php-multitool:latest \
+        parallel-lint .
 
 ## Credits
 
