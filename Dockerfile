@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 
-LABEL org.opencontainers.image.source https://github.com/kasparsd/php-multi-linter
+LABEL org.opencontainers.image.source https://github.com/kasparsd/php-multitool
 
 # System dependencies.
 RUN apt-get update \
@@ -13,24 +13,37 @@ RUN curl --location https://packages.sury.org/php/apt.gpg | apt-key add - \
 
 # Install PHP versions.
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-        php5.6-cli \
-        php7.2-cli \
-        php7.4-cli \
-        php8.1-cli \
-        php8.2-cli \
-        php8.3-cli \
-        php8.4-cli \
+        php5.6-cli php5.6-xmlwriter \
+        php7.2-cli php7.2-xmlwriter \
+        php7.4-cli php7.4-xmlwriter \
+        php8.0-cli php8.1-xmlwriter \
+        php8.1-cli php8.1-xmlwriter \
+        php8.2-cli php8.2-xmlwriter \
+        php8.3-cli php8.3-xmlwriter \
+        php8.4-cli php8.4-xmlwriter \
     && apt-get clean
 
 # Set the default php binary version.
 RUN update-alternatives --set php /usr/bin/php7.4
 
-WORKDIR /app
+# Install Composer.
+RUN curl --silent --show-error https://getcomposer.org/installer \
+        | php -- --install-dir=/usr/bin --filename=composer --2.2
 
-COPY lint.php ./
+# Persist the cache between runs.
+VOLUME /root/.composer/cache
 
-# Install PHP-Parallel-Lint.
-RUN curl --location https://github.com/php-parallel-lint/PHP-Parallel-Lint/releases/download/v1.4.0/parallel-lint.phar -o /usr/bin/parallel-lint \
-    && chmod +x /usr/bin/parallel-lint
+COPY composer.json composer.lock entrypoint.sh /root/.composer/
 
-CMD ["parallel-lint"]
+# Add Composer global bin directory to PATH.
+ENV PATH /root/.composer/vendor/bin:${PATH}
+
+# Install all tools.
+RUN composer global install --no-cache --no-interaction
+
+# Run commands inside this directory by default.
+WORKDIR /code
+
+ENTRYPOINT [ "/root/.composer/entrypoint.sh" ]
+
+CMD ["composer", "global", "show", "-vvv"]
