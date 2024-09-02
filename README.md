@@ -53,7 +53,6 @@ The default command is set to `composer global show -vvv` which lists all of the
     phpcsstandards/phpcsutils                        1.0.12              A suite of utility funct...
     squizlabs/php_codesniffer                        3.10.2              PHP_CodeSniffer tokenize...
 
-
 ### Runing Locally
 
 1. Build the image locally using `docker compose build`.
@@ -61,6 +60,27 @@ The default command is set to `composer global show -vvv` which lists all of the
 2. Run `parallel-lint` against the files in the [`tests` directory](tests) which is the default behaviour:
 
        docker compose run --rm -e PHPBIN=php8.2 php-multitool parallel-lint ./tests
+
+### `php-multitool` Alias
+
+Add an alias to your shell profile (e.g., `~/.bashrc` or `~/.zshrc`) for each version of PHP as needed:
+
+    alias php-multitool-8.4='docker run --rm -e PHPBIN=php8.4 -v .:/code ghcr.io/kasparsd/php-multitool:latest'
+
+and then use it like this:
+
+    php-multitool-8.4 composer global show
+
+## Available Tools
+
+All examples below assume that you're running the commands from the root of your PHP project directory.
+
+### phpcs and phpcbf (PHP_CodeSniffer)
+
+#### Check PHP 8 Compatibility of WordPress projects
+
+    docker run --rm -v .:/code -e PHPBIN=php8.4 ghcr.io/kasparsd/php-multitool:latest \
+        phpcs -p --standard=PHPCompatibilityWP --extensions=php .
 
 ## Credits
 
