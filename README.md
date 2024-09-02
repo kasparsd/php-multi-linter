@@ -10,11 +10,9 @@ Similar tools:
 
 - The [Docker image](Dockerfile) installs multiple PHP versions and Composer v2.
 
-- The `composer.json` and `composer.lock` files are copied to the `/app` directory inside the container which is also configured as the `COMPOSER_HOME` directory.
+- The `composer.json` and `composer.lock` files are copied to the `/root/.composer` directory inside the image (which is also the `COMPOSER_HOME` directory) and the defined packages are installed globally.
 
-- All Composer packages from [`composer.json`](composer.json) are installed globally.
-
-- The `/app/vendor/bin` directory is added to the `PATH` inside the container so that all Composer package binaries can be run directly.
+- The `/root/.composer/vendor/bin` directory is added to the `PATH` of the image so that all Composer package binaries can be run directly.
 
 - The entrypoint for all commands is set to [`entrypoint.sh`](entrypoint.sh) which reads the `PHPBIN` environment variable value passed to the container and sets the `php` binary alias to `/usr/bin/${PHPBIN}`.
 
