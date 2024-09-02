@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 
-LABEL org.opencontainers.image.source https://github.com/kasparsd/php-multitool
+LABEL org.opencontainers.image.source=https://github.com/kasparsd/php-multitool
 
 # System dependencies.
 RUN apt-get update \
@@ -36,7 +36,7 @@ VOLUME /root/.composer/cache
 COPY composer.json composer.lock entrypoint.sh /root/.composer/
 
 # Add Composer global bin directory to PATH.
-ENV PATH /root/.composer/vendor/bin:${PATH}
+ENV PATH=/root/.composer/vendor/bin:${PATH}
 
 # Install all tools.
 RUN composer global install --no-cache --no-interaction
