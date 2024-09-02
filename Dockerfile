@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source=https://github.com/kasparsd/php-multitool
 
 # System dependencies.
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends git curl wget gnupg2 ca-certificates lsb-release apt-transport-https
+    && apt-get install --yes --no-install-recommends git zip unzip curl wget gnupg2 ca-certificates lsb-release apt-transport-https
 
 # Add https://packages.sury.org/php/ repository and install PHP.
 RUN curl --location https://packages.sury.org/php/apt.gpg | apt-key add - \
